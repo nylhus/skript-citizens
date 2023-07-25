@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public final class SkriptCitizens extends JavaPlugin {
 
     private static SkriptCitizens instance;
-    private SkriptAddon addon;
+    private static SkriptAddon addon;
     private static Logger logger;
 
     public static void info(String message) {
@@ -34,7 +34,7 @@ public final class SkriptCitizens extends JavaPlugin {
         addon = Skript.registerAddon(this);
         logger = this.getLogger();
         try {
-            addon.loadClasses("ca.nylhus.skriptcitizens");
+            addon.loadClasses("ca.nylhus.skriptcitizens.elements");
         } catch (IOException e) {
             e.printStackTrace();
         }
