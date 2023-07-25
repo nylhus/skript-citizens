@@ -13,6 +13,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.CitizensAPI;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
@@ -24,6 +25,8 @@ import org.eclipse.jdt.annotation.Nullable;
 @Examples("")
 @Since("1.0.0")
 public class EffSpawnCitizen extends Effect {
+
+    public static NPC lastSpawnedNPC;
 
     static {
         Skript.registerEffect(EffSpawnCitizen.class, "(spawn|create) [a[n]] [%-entitydata%] citizen [named %-string%] at %location%");
@@ -53,9 +56,9 @@ public class EffSpawnCitizen extends Effect {
         String citizenName = (this.name != null && this.name.getSingle(event) != null) ? this.name.getSingle(event) : "";
         Location location = this.location.getSingle(event);
         if (location != null) {
-            CitizensAPI.getNPCRegistry().createNPC(citizenType, citizenName, location);
+            lastSpawnedNPC = CitizensAPI.getNPCRegistry().createNPC(citizenType, citizenName, location);
         } else {
-            CitizensAPI.getNPCRegistry().createNPC(citizenType, citizenName);
+            lastSpawnedNPC = CitizensAPI.getNPCRegistry().createNPC(citizenType, citizenName);
         }
     }
 
