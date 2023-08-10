@@ -16,10 +16,10 @@ import org.eclipse.jdt.annotation.Nullable;
 @Description("Represents whether the citizen should use vanilla Minecraft AI.")
 @Examples("set should use ai of {_npc} to true")
 @Since("1.0.0")
-public class ExprMinecraftAI extends SimplePropertyExpression<NPC, Boolean> {
+public class ExprCitizenMinecraftAI extends SimplePropertyExpression<NPC, Boolean> {
 
     static {
-        register(ExprMinecraftAI.class, Boolean.class, "[(citizen|npc)] should use [minecraft] ai", "npcs");
+        register(ExprCitizenMinecraftAI.class, Boolean.class, "[(citizen|npc)] should use [minecraft] ai", "npcs");
     }
 
     @Override
