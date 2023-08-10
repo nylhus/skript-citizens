@@ -6,15 +6,11 @@ import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
 import ch.njol.util.coll.CollectionUtils;
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.npc.NPCRegistry;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 public class Types {
-
-    private static final NPCRegistry NPC_REGISTRY = CitizensAPI.getNPCRegistry();
 
     static {
         Classes.registerClass(new ClassInfo<>(NPC.class, "npc")
@@ -55,7 +51,7 @@ public class Types {
                     public void change(NPC[] what, @Nullable Object[] delta, ChangeMode mode) {
                         if (mode == ChangeMode.DELETE) {
                             for (NPC npc : what) {
-                                NPC_REGISTRY.deregister(npc);
+                                npc.destroy();
                             }
                         }
                     }
