@@ -1,4 +1,4 @@
-package ca.nylhus.skriptcitizens.elements.classes;
+package ca.nylhus.skriptcitizens.classes;
 
 import ch.njol.skript.classes.Changer;
 import ch.njol.skript.classes.ClassInfo;
