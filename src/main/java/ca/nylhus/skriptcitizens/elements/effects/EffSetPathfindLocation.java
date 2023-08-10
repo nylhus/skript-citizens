@@ -11,6 +11,7 @@ import ch.njol.skript.lang.SkriptParser;
 import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.ai.Navigator;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.Nullable;
@@ -47,9 +48,9 @@ public class EffSetPathfindLocation extends Effect {
         Location target = location.getSingle(e);
         Number moveSpeed = (speed.getSingle(e) != null) ? speed.getSingle(e) : 1;
         if (citizen != null && target != null) {
-            Navigator navigator = citizen.getNavigator();
-            navigator.getDefaultParameters().baseSpeed(moveSpeed.floatValue());
-            navigator.setTarget(target);
+            Bukkit.getServer().broadcastMessage("Citizen and Target are set");
+            citizen.getNavigator().setTarget(target);
+            citizen.getNavigator().getDefaultParameters().baseSpeed(moveSpeed.floatValue());
         }
     }
 
