@@ -23,13 +23,16 @@ import org.eclipse.jdt.annotation.Nullable;
 public class EffSetPathfindLocation extends Effect {
 
     private Expression<Location> location;
+    @Nullable
     private Expression<Number> speed;
     private Expression<NPC> npc;
 
     static {
-        Skript.registerEffect(EffSetPathfindLocation.class, "set pathfind location of %npc% to %location%", "move %npc% to %location%");
+        Skript.registerEffect(EffSetPathfindLocation.class,
+                "set pathfind location of %npc% to %location% [(at|with) speed %number%]", "move %npc% to %location% [(at|with) speed %number%]");
     }
 
+    @SuppressWarnings({"NullableProblems", "unchecked"})
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, SkriptParser.ParseResult parseResult) {
         npc = (Expression<NPC>) exprs[0];
@@ -37,12 +40,7 @@ public class EffSetPathfindLocation extends Effect {
         speed = (Expression<Number>) exprs[2];
         return true;
     }
-
-    @Override
-    public String toString(@Nullable Event e, boolean debug) {
-        return npc + " is now pathfinding to " + location;
-    }
-
+    @SuppressWarnings("NullableProblems")
     @Override
     protected void execute(Event e) {
         NPC citizen = npc.getSingle(e);
@@ -53,5 +51,11 @@ public class EffSetPathfindLocation extends Effect {
             navigator.getDefaultParameters().baseSpeed(moveSpeed.floatValue());
             navigator.setTarget(target);
         }
+    }
+
+    @SuppressWarnings("NullableProblems")
+    @Override
+    public String toString(@Nullable Event e, boolean debug) {
+        return npc + " is now pathfinding to " + location;
     }
 }

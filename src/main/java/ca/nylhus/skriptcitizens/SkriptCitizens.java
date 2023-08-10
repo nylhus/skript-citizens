@@ -34,7 +34,7 @@ public final class SkriptCitizens extends JavaPlugin {
         addon = Skript.registerAddon(this);
         logger = this.getLogger();
         try {
-            addon.loadClasses("ca.nylhus.skriptcitizens.elements");
+            addon.loadClasses("ca.nylhus.skriptcitizens");
         } catch (IOException e) {
             e.printStackTrace();
         }

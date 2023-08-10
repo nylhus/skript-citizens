@@ -1,4 +1,4 @@
-package ca.nylhus.skriptcitizens.elements.classes;
+package ca.nylhus.skriptcitizens.classes;
 
 import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
