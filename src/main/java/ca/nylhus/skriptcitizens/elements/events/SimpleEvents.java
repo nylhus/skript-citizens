@@ -24,6 +24,11 @@ public class SimpleEvents {
 
     static {
         // Events
+        Skript.registerEvent("Citizen Click", SimpleEvent.class, NPCClickEvent.class,
+                        "(citizen|npc) click")
+                .description("Called when an NPC is clicked by a player.")
+                .examples("on npc click:", "\tbroadcast \"an NPC has been clicked!\"")
+                .since("1.0.0");
         Skript.registerEvent("Citizen Left Click", SimpleEvent.class, NPCLeftClickEvent.class,
                         "(citizen|npc) left click")
                 .description("Called when an NPC is left-clicked by a player.")
