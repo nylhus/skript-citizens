@@ -29,12 +29,12 @@ public final class SkriptCitizens extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         instance = this;
         addon = Skript.registerAddon(this);
         logger = this.getLogger();
         try {
             addon.loadClasses("ca.nylhus.skriptcitizens");
+            addon.setLanguageFileDirectory("lang");
         } catch (IOException e) {
             e.printStackTrace();
         }
