@@ -1,5 +1,6 @@
 package ca.nylhus.skriptcitizens.elements.effects;
 
+import ca.nylhus.skriptcitizens.SkriptCitizens;
 import ch.njol.skript.Skript;
 import ch.njol.skript.bukkitutil.EntityUtils;
 import ch.njol.skript.doc.Description;
@@ -12,7 +13,6 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -56,9 +56,9 @@ public class EffSpawnCitizen extends Effect {
         String citizenName = (this.name != null && this.name.getSingle(event) != null) ? this.name.getSingle(event) : "";
         Location location = this.location.getSingle(event);
         if (location != null) {
-            lastSpawnedNPC = CitizensAPI.getNPCRegistry().createNPC(citizenType, citizenName, location);
+            lastSpawnedNPC = SkriptCitizens.getNPCRegistry().createNPC(citizenType, citizenName, location);
         } else {
-            lastSpawnedNPC = CitizensAPI.getNPCRegistry().createNPC(citizenType, citizenName);
+            lastSpawnedNPC = SkriptCitizens.getNPCRegistry().createNPC(citizenType, citizenName);
         }
     }
 

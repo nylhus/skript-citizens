@@ -1,5 +1,6 @@
 package ca.nylhus.skriptcitizens.elements.expressions;
 
+import ca.nylhus.skriptcitizens.SkriptCitizens;
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.Description;
 import ch.njol.skript.doc.Examples;
@@ -10,9 +11,7 @@ import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
-import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.npc.NPCRegistry;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -22,8 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 @Examples("set {_npc} to citizen from id 1")
 @Since("1.0.0")
 public class ExprCitizenFromID extends SimpleExpression<NPC> {
-
-    private static final NPCRegistry NPC_REGISTRY = CitizensAPI.getNPCRegistry();
 
     static {
         Skript.registerExpression(ExprCitizenFromID.class, NPC.class, ExpressionType.COMBINED,
@@ -45,7 +42,7 @@ public class ExprCitizenFromID extends SimpleExpression<NPC> {
         Number idNum = this.id.getSingle(event);
         if (idNum != null) {
             int id = idNum.intValue();
-            NPC citizen = NPC_REGISTRY.getById(id);
+            NPC citizen = SkriptCitizens.getNPCRegistry().getById(id);
             return new NPC[]{citizen};
         }
         return null;
