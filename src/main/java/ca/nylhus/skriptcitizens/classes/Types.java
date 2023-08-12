@@ -11,7 +11,7 @@ import ch.njol.util.coll.CollectionUtils;
 import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.SpawnReason;
 import net.citizensnpcs.api.npc.NPC;
-import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
@@ -122,8 +122,8 @@ public class Types {
                 }));
 
         // CONVERTERS
-        // Enables the use of `location of %npc%`
-        Converters.registerConverter(NPC.class, Location.class, npc -> npc.getEntity().getLocation());
+        // Enables any Skript effect/expression that works for entities
+        Converters.registerConverter(NPC.class, Entity.class, NPC::getEntity);
     }
 
 }
