@@ -6,6 +6,7 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.NPCClickEvent;
+import net.citizensnpcs.api.event.NPCCreateEvent;
 import net.citizensnpcs.api.event.NPCDespawnEvent;
 import net.citizensnpcs.api.event.NPCEvent;
 import net.citizensnpcs.api.event.NPCLeftClickEvent;
@@ -29,6 +30,7 @@ public class SimpleEvents {
                 .description("Called when an NPC is clicked by a player.")
                 .examples("on npc click:", "\tbroadcast \"an NPC has been clicked!\"")
                 .since("1.0.0");
+
         Skript.registerEvent("Citizen Left Click", SimpleEvent.class, NPCLeftClickEvent.class,
                         "(citizen|npc) left click")
                 .description("Called when an NPC is left-clicked by a player.")
@@ -54,6 +56,12 @@ public class SimpleEvents {
         Skript.registerEvent("Citizen Spawn", SimpleEvent.class, NPCSpawnEvent.class,
                         "(citizen|npc) spawn")
                 .description("Called when an NPC spawns.")
+                .since("1.0.0");
+
+        Skript.registerEvent("Citizen Create", SimpleEvent.class, NPCCreateEvent.class,
+                        "(citizen|npc) create")
+                .description("Called when an NPC has been created")
+                .examples("on npc create: \tteleport event-npc to spawn of world \"world\"")
                 .since("1.0.0");
 
         // Event Values
