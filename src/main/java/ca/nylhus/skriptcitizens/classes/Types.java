@@ -5,15 +5,17 @@ import ch.njol.skript.classes.ClassInfo;
 import ch.njol.skript.classes.Parser;
 import ch.njol.skript.lang.ParseContext;
 import ch.njol.skript.registrations.Classes;
-import ch.njol.util.coll.CollectionUtils;
+import ch.njol.skript.registrations.Converters;
 import ch.njol.skript.util.EnumUtils;
+import ch.njol.util.coll.CollectionUtils;
 import net.citizensnpcs.api.event.DespawnReason;
 import net.citizensnpcs.api.event.SpawnReason;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.entity.Entity;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "deprecation"})
 public class Types {
 
     static {
@@ -118,6 +120,10 @@ public class Types {
                         return "npcdespawnreason:" + toString(despawnReason, 0);
                     }
                 }));
+
+        // CONVERTERS
+        // Enables any Skript effect/expression that works for entities
+        Converters.registerConverter(NPC.class, Entity.class, NPC::getEntity);
     }
 
 }
