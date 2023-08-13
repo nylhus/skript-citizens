@@ -48,7 +48,6 @@ public class EffSetPathfindLocation extends Effect {
         Location target = location.getSingle(e);
         Number moveSpeed = (speed.getSingle(e) != null) ? speed.getSingle(e) : 1;
         if (citizen != null && target != null) {
-            Bukkit.getServer().broadcastMessage("Citizen and Target are set");
             citizen.getNavigator().setTarget(target);
             citizen.getNavigator().getDefaultParameters().baseSpeed(moveSpeed.floatValue());
         }
