@@ -12,45 +12,48 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 import net.citizensnpcs.api.npc.NPC;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.Event;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-@Name("Citizen from ID")
-@Description("Get a citizen from ID.")
-@Examples("set {_npc} to citizen from id 1")
+import java.util.ArrayList;
+import java.util.List;
+
+@Name("Citizen from Entity")
+@Description("Get a citizen from an entity.")
+@Examples("set {_npc} to npc from entity target entity")
 @Since("1.0.0")
-public class ExprCitizenFromID extends SimpleExpression<NPC> {
+public class ExprCitizenFromEntity extends SimpleExpression<NPC> {
 
     static {
-        Skript.registerExpression(ExprCitizenFromID.class, NPC.class, ExpressionType.COMBINED,
-                "(citizen|npc) from id %number%");
+        Skript.registerExpression(ExprCitizenFromEntity.class, NPC.class, ExpressionType.COMBINED,
+                "(citizen|npc)[s] from entit(y|ies) s%entities%");
     }
 
-    private Expression<Number> id;
+    private Expression<Entity> entities;
 
-    @SuppressWarnings({"NullableProblems", "unchecked"})
+    @SuppressWarnings({"unchecked", "NullableProblems"})
     @Override
     public boolean init(Expression<?>[] exprs, int matchedPattern, Kleenean isDelayed, ParseResult parseResult) {
-        this.id = (Expression<Number>) exprs[0];
+        this.entities = (Expression<Entity>) exprs[0];
         return true;
     }
 
     @SuppressWarnings("NullableProblems")
     @Override
     protected @Nullable NPC[] get(Event event) {
-        Number idNum = this.id.getSingle(event);
-        if (idNum != null) {
-            int id = idNum.intValue();
-            NPC citizen = SkriptCitizens.getNPCRegistry().getById(id);
-            return new NPC[]{citizen};
+        List<NPC> npcs = new ArrayList<>();
+        for (Entity entity : this.entities.getArray(event)) {
+            NPC npc = SkriptCitizens.getNPCRegistry().getNPC(entity);
+            if (npc != null) npcs.add(npc);
         }
-        return null;
+        return npcs.toArray(new NPC[0]);
     }
 
     @Override
     public boolean isSingle() {
-        return true;
+        return this.entities.isSingle();
     }
 
     @Override
@@ -62,7 +65,8 @@ public class ExprCitizenFromID extends SimpleExpression<NPC> {
     @Override
     @NonNull
     public String toString(@Nullable Event event, boolean debug) {
-        return "citizen from id " + this.id.toString(event, debug);
+        String plural = this.entities.isSingle() ? "entity " : "entities ";
+        return "citizen[s] from " + plural + this.entities.toString(event, debug);
     }
 
 }
