@@ -28,7 +28,7 @@ public class ExprCitizenFromEntity extends SimpleExpression<NPC> {
 
     static {
         Skript.registerExpression(ExprCitizenFromEntity.class, NPC.class, ExpressionType.COMBINED,
-                "(citizen|npc)[s] from entit(y|ies) s%entities%");
+                "(citizen|npc)[s] from entit(y|ies) %entities%");
     }
 
     private Expression<Entity> entities;
