@@ -1,4 +1,4 @@
-package ca.nagasonic.skonic.elements.util;
+package ca.nylhus.skriptcitizens.util;
 
 import com.google.common.io.CharStreams;
 import com.google.gson.JsonObject;
