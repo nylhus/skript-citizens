@@ -1,4 +1,4 @@
-package ca.nagasonic.skonic.elements.citizens.effects;
+package ca.nylhus.skriptcitizens.elements.effects;
 
 import ch.njol.skript.Skript;
 import ch.njol.skript.doc.*;
